@@ -2,7 +2,7 @@
   "name": "fx-checker",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://tozka.github.io/fx-checker",
+  "homepage": "https://nice-rich-2030.github.io/fx-checker",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
