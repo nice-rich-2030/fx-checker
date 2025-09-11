@@ -62,7 +62,7 @@ const ChanceRecorder = () => {
 
   return (
     <div style={{ maxWidth: '600px', margin: '0 auto', padding: '20px' }}>
-      <h1>FXチャンス記録ツール</h1>
+      <h1 style={{ marginTop: 0 }}>チャンス記録</h1>
       
       {recordError && (
         <div style={{ padding: '10px', backgroundColor: '#ffebee', border: '1px solid #f44336', marginBottom: '20px' }}>
