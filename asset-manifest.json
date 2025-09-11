@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/fx-checker/static/js/main.1735a75f.js",
+    "main.js": "/fx-checker/static/js/main.4fa2a001.js",
     "index.html": "/fx-checker/index.html",
-    "main.1735a75f.js.map": "/fx-checker/static/js/main.1735a75f.js.map"
+    "main.4fa2a001.js.map": "/fx-checker/static/js/main.4fa2a001.js.map"
   },
   "entrypoints": [
-    "static/js/main.1735a75f.js"
+    "static/js/main.4fa2a001.js"
   ]
 }
