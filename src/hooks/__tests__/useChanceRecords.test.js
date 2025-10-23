@@ -130,7 +130,7 @@ describe('useChanceRecords', () => {
 
   test('フィルターでレコードを検索できる', () => {
     const { result } = renderHook(() => useChanceRecords());
-    
+
     act(() => {
       result.current.addRecord({
         currencyPair: 'USD/JPY',
@@ -138,7 +138,9 @@ describe('useChanceRecords', () => {
         pattern: 'ダブルトップ',
         direction: 'ショート'
       });
-      
+    });
+
+    act(() => {
       result.current.addRecord({
         currencyPair: 'EUR/USD',
         timeframe: '4H',
@@ -157,7 +159,7 @@ describe('useChanceRecords', () => {
 
   test('統計情報を正しく計算する', () => {
     const { result } = renderHook(() => useChanceRecords());
-    
+
     act(() => {
       result.current.addRecord({
         currencyPair: 'USD/JPY',
@@ -165,7 +167,9 @@ describe('useChanceRecords', () => {
         pattern: 'ダブルトップ',
         direction: 'ショート'
       });
-      
+    });
+
+    act(() => {
       result.current.addRecord({
         currencyPair: 'USD/JPY',
         timeframe: '4H',
@@ -175,7 +179,7 @@ describe('useChanceRecords', () => {
     });
 
     const recordId = result.current.records[0].id;
-    
+
     act(() => {
       result.current.updateRecord(recordId, {
         tradeExecuted: true,
@@ -184,7 +188,7 @@ describe('useChanceRecords', () => {
     });
 
     const stats = result.current.getStatistics();
-    
+
     expect(stats.totalRecords).toBe(2);
     expect(stats.executedTrades).toBe(1);
     expect(stats.successfulTrades).toBe(1);

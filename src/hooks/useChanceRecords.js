@@ -41,8 +41,8 @@ const useChanceRecords = () => {
 
   const addRecord = useCallback((recordData) => {
     try {
-      const { currencyPair, timeframe, pattern, direction, confidence = 3, memo = '' } = recordData;
-      
+      const { currencyPair, timeframe, pattern, direction, confidence = 3, memo = '', chartUrl = '' } = recordData;
+
       if (!currencyPair || !timeframe || !pattern || !direction) {
         throw new Error('必須項目が不足しています');
       }
@@ -52,7 +52,7 @@ const useChanceRecords = () => {
       }
 
       const confidenceValue = Math.max(1, Math.min(5, parseInt(confidence)));
-      
+
       if (memo && memo.length > 200) {
         throw new Error('メモは200文字以内で入力してください');
       }
@@ -65,6 +65,7 @@ const useChanceRecords = () => {
         direction,
         confidence: confidenceValue,
         memo: memo.trim(),
+        chartUrl: chartUrl.trim(),
         tradeExecuted: false,
         tradeResult: null,
         createdAt: new Date().toISOString(),

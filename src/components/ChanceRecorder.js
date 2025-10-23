@@ -16,6 +16,7 @@ const ChanceRecorder = () => {
   const [selectedDirection, setSelectedDirection] = useState('');
   const [confidence, setConfidence] = useState(3);
   const [memo, setMemo] = useState('');
+  const [chartUrl, setChartUrl] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -35,7 +36,8 @@ const ChanceRecorder = () => {
         pattern: selectedPattern,
         direction: selectedDirection,
         confidence,
-        memo
+        memo,
+        chartUrl
       });
 
       setSelectedPair('');
@@ -44,15 +46,16 @@ const ChanceRecorder = () => {
       setSelectedDirection('');
       setConfidence(3);
       setMemo('');
+      setChartUrl('');
       setSuccessMessage('チャンス記録を保存しました');
-      
+
       setTimeout(() => setSuccessMessage(''), 3000);
     } catch (err) {
       setSubmitError(err.message || '保存に失敗しました');
     } finally {
       setIsSubmitting(false);
     }
-  }, [selectedPair, selectedTimeframe, selectedPattern, selectedDirection, confidence, memo, addRecord]);
+  }, [selectedPair, selectedTimeframe, selectedPattern, selectedDirection, confidence, memo, chartUrl, addRecord]);
 
   const isFormValid = selectedPair && selectedTimeframe && selectedPattern && selectedDirection;
 
@@ -208,6 +211,35 @@ const ChanceRecorder = () => {
           </div>
         </div>
 
+        <div style={{ marginBottom: '20px' }}>
+          <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>
+            チャート画像URL (任意)
+          </label>
+          <input
+            type="url"
+            value={chartUrl}
+            onChange={(e) => setChartUrl(e.target.value)}
+            style={{ width: '100%', padding: '8px', fontSize: '14px' }}
+            placeholder="https://example.com/chart.png"
+          />
+          {chartUrl && (
+            <div style={{ marginTop: '10px', border: '1px solid #ddd', padding: '5px' }}>
+              <img
+                src={chartUrl}
+                alt="Chart preview"
+                style={{ maxWidth: '100%', height: 'auto', display: 'block' }}
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  e.target.nextSibling.style.display = 'block';
+                }}
+              />
+              <div style={{ display: 'none', padding: '10px', color: '#666', textAlign: 'center' }}>
+                画像を読み込めません
+              </div>
+            </div>
+          )}
+        </div>
+
         {submitError && (
           <div style={{ padding: '10px', backgroundColor: '#ffebee', border: '1px solid #f44336', marginBottom: '10px' }}>
             {submitError}
@@ -257,7 +289,7 @@ const ChanceRecorder = () => {
                   </span>
                 </div>
                 <div>
-                  {record.timeframe} | {record.pattern} | 
+                  {record.timeframe} | {record.pattern} |
                   <span style={{ color: record.direction === 'ロング' ? '#28a745' : '#dc3545' }}>
                     {record.direction}
                   </span>
@@ -266,6 +298,22 @@ const ChanceRecorder = () => {
                 {record.memo && (
                   <div style={{ fontSize: '12px', color: '#666', marginTop: '5px' }}>
                     {record.memo}
+                  </div>
+                )}
+                {record.chartUrl && (
+                  <div style={{ marginTop: '10px' }}>
+                    <img
+                      src={record.chartUrl}
+                      alt="Chart"
+                      style={{ maxWidth: '100%', height: 'auto', border: '1px solid #ddd', display: 'block' }}
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        e.target.nextSibling.style.display = 'block';
+                      }}
+                    />
+                    <div style={{ display: 'none', padding: '5px', fontSize: '12px', color: '#999', textAlign: 'center' }}>
+                      画像を読み込めません
+                    </div>
                   </div>
                 )}
               </div>
