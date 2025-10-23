@@ -59,8 +59,8 @@ describe('ChanceRecorder', () => {
 
   test('コンポーネントが正しくレンダリングされる', () => {
     render(<ChanceRecorder />);
-    
-    expect(screen.getByText('FXチャンス記録ツール')).toBeInTheDocument();
+
+    expect(screen.getByText('チャンス記録')).toBeInTheDocument();
     expect(screen.getByText('通貨ペア *')).toBeInTheDocument();
     expect(screen.getByText('時間足 *')).toBeInTheDocument();
     expect(screen.getByText('エントリーパターン *')).toBeInTheDocument();
@@ -158,7 +158,8 @@ describe('ChanceRecorder', () => {
       pattern: 'ダブルトップ',
       direction: 'ショート',
       confidence: 3,
-      memo: ''
+      memo: '',
+      chartUrl: ''
     });
   });
 

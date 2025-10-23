@@ -329,14 +329,31 @@ const RecordList = () => {
               </div>
 
               {record.memo && (
-                <div style={{ 
-                  backgroundColor: '#f8f9fa', 
-                  padding: '8px', 
+                <div style={{
+                  backgroundColor: '#f8f9fa',
+                  padding: '8px',
                   marginBottom: '10px',
                   fontSize: '14px',
                   borderLeft: '3px solid #007bff'
                 }}>
                   {record.memo}
+                </div>
+              )}
+
+              {record.chartUrl && (
+                <div style={{ marginTop: '10px', marginBottom: '10px' }}>
+                  <img
+                    src={record.chartUrl}
+                    alt="Chart"
+                    style={{ maxWidth: '100%', height: 'auto', border: '1px solid #ddd', display: 'block' }}
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'block';
+                    }}
+                  />
+                  <div style={{ display: 'none', padding: '10px', fontSize: '12px', color: '#999', textAlign: 'center', backgroundColor: '#f8f9fa' }}>
+                    画像を読み込めません
+                  </div>
                 </div>
               )}
 
